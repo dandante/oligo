@@ -6,6 +6,8 @@
 ######################################################
 ######################################################
 
+## FIXME: add a getProbeLevels??? (ST: bg/antigenomic/genomic/pm/etc)
+
 getProbeTypes <- function(object){
     ## for exon/gene ST arrays, the BG probes are stored in the
     ## pmfeature as well... how to fix?
@@ -14,6 +16,7 @@ getProbeTypes <- function(object){
 }
 
 getProbeTargets <- function(object, probeType='pm'){
+    ## TODO: fix me!
     switch(probeType,
            pm=c('core', 'full', 'extended', 'probeset'),
            bg=c('genomic', 'antigenomic'))
@@ -79,17 +82,17 @@ getProbeInfo <- function(object, field, probeType='pm', target='core',
     probeTable <- paste(probeType, 'feature', sep='')
     if (isST & target!='probeset'){
       ## FIXME: if 'field' contains man_fsetid, return that as well
-        fields <- unique(c('fid', 'meta_fsetid as man_fsetid', field))
-        fields <- paste(fields, collapse=', ')
-        mpsTable <- paste(target, 'mps', sep='_')
-        fields <- gsub('transcript_cluster_id',
-                       paste(mpsTable, '.transcript_cluster_id as transcript_cluster_id', sep=''),
-                       fields)
-        tables <- paste('pmfeature, featureSet,', mpsTable)
-        sql <- paste('SELECT', fields, 'FROM', tables,
-                     'WHERE pmfeature.fsetid=featureSet.fsetid AND',
-                     paste('featureSet.fsetid=', mpsTable, '.fsetid', sep=''))
-        rm(fields, mpsTable, tables)
+      fields <- unique(c('fid', 'meta_fsetid as man_fsetid', field))
+      fields <- paste(fields, collapse=', ')
+      mpsTable <- paste(target, 'mps', sep='_')
+      fields <- gsub('transcript_cluster_id',
+                     paste(mpsTable, '.transcript_cluster_id as transcript_cluster_id', sep=''),
+                     fields)
+      tables <- paste('pmfeature, featureSet,', mpsTable)
+      sql <- paste('SELECT', fields, 'FROM', tables,
+                   'WHERE pmfeature.fsetid=featureSet.fsetid AND',
+                   paste('featureSet.fsetid=', mpsTable, '.fsetid', sep=''))
+      rm(fields, mpsTable, tables)
     }else{
         fields <- unique(c('fid', 'man_fsetid', field))
         fields <- paste(fields, collapse=', ')
