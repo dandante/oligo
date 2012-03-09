@@ -60,7 +60,6 @@ setReplaceMethod('coefs.probe', 'oligoPLM',
                      object
                  })
 
-##setGeneric('weights', function(object) standardGeneric('weights'))
 setMethod('weights', 'oligoPLM',
           function(object, ...){
               object@weights
@@ -193,10 +192,6 @@ setMethod("show", "oligoPLM",
           })
 
 
-## if( !isGeneric("boxplot") )
-##     setGeneric("boxplot", function(x,...)
-##                standardGeneric("boxplot"))
-
 ## fix names(theMat)
 setMethod("boxplot",signature(x="oligoPLM"),
           function(x, type=c("NUSE", "RLE", "weights", "residuals"),
@@ -283,7 +278,6 @@ setMethod('image', 'oligoPLM',
               image(theMat, col=col, yaxt='n', xaxt='n', main=main, ...)
           }
 )
-
 
 fitPLM <- function(...)
     .Deprecated('fitProbeLevelModel')
