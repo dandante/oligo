@@ -1,5 +1,5 @@
 Package: oligo
-Version: 1.19.13
+Version: 1.19.14
 Title: Preprocessing tools for oligonucleotide arrays.
 Authors@R: c(person("Benilton", "Carvalho", role=c("aut", "cre"), email="Benilton.Carvalho@cancer.org.uk"),
             person("Rafael", "Irizarry", role="aut"),
@@ -16,12 +16,12 @@ Imports: affyio (>= 1.19.4),
          affxparser (>= 1.23.1),
          Biobase (>= 2.11.8),
          Biostrings,
-         BiocGenerics,
+         BiocGenerics (>= 0.1.14),
          DBI (>= 0.2-5),
          ff,
          graphics,
          methods,
-         preprocessCore (>= 1.13.5),
+         preprocessCore (>= 1.17.5),
          splines,
          stats,
          stats4,
