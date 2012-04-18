@@ -36,8 +36,8 @@ intensity(object)
 mm(object, subset = NULL)
 pm(object, subset = NULL, ...)
 bg(object, subset = NULL)
-mm(object)<-value
-pm(object)<-value
+mm(object, ...)<-value
+pm(object, ...)<-value
 bg(object)<-value
 }
 
@@ -45,7 +45,8 @@ bg(object)<-value
   \item{object}{\code{FeatureSet} object.}
   \item{subset}{Not implemented yet.}
   \item{value}{\code{matrix} object.}
-  \item{...}{Extra arguments for future implementation.}
+  \item{...}{Extra arguments: \code{target} that can take the following
+  values 'probeset', 'core', 'full', 'extended'. See Details.}
 }
 
 \details{
@@ -56,6 +57,16 @@ bg(object)<-value
   \code{intensity} will return the whole intensity matrix associated to
   the object. \code{pm}, \code{mm}, \code{bg} will return the respective
   PM/MM/BG matrix.
+
+  When applied to \code{ExonFeatureSet} or \code{GeneFeatureSet}
+  objects, \code{pm} will return the PM matrix at the transcript level
+  ('core' probes) by default. The user should set the \code{target}
+  argument accordingly if something else is desired. The valid values
+  are: 'probeset' (Exon and Gene arrays), 'core' (Exon and Gene arrays),
+  'full' (Exon arrays) and 'extended' (Exon arrays).
+
+  The \code{target} argument has no effects when used on designs other
+  than Gene and Exon ST.
 }
 
 \examples{
