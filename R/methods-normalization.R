@@ -98,18 +98,18 @@ setMethod("normalize", "ff_matrix",
           })
 
 setMethod("normalizeToTarget", "matrix",
-          function(object, target, method="quantile", copy=TRUE, verbose=TRUE){
-            stopifnot(!missing(target))
+          function(object, targetDist, method="quantile", copy=TRUE, verbose=TRUE){
+            stopifnot(!missing(targetDist))
             method <- match.arg(method, "quantile")
             if (verbose) txtMsg("Normalizing using target... ")
-            out <- normalize.quantiles.use.target(object, target, copy=copy)
+            out <- normalize.quantiles.use.target(object, targetDist, copy=copy)
             if (verbose) msgOK()
             return(out)
           })
 
 setMethod("normalizeToTarget", "ff_matrix",
-          function(object, target, method="quantile", copy=TRUE, verbose=TRUE){
-            stopifnot(!missing(target))
+          function(object, targetDist, method="quantile", copy=TRUE, verbose=TRUE){
+            stopifnot(!missing(targetDist))
             method <- match.arg(method, "quantile")
             if (verbose) txtMsg("Normalizing using target... ")
             if (copy){
@@ -118,7 +118,7 @@ setMethod("normalizeToTarget", "ff_matrix",
               out <- object
             }
             if (method == "quantile"){
-              quantileNormalizationLDSmaster(out, target)
+              quantileNormalizationLDSmaster(out, targetDist)
             }
             if (verbose) msgOK()
             return(out)
